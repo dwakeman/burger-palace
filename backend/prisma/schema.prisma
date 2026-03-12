@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  phone     String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  orders    Order[]
+
+  @@map("customers")
+}
+
+model MenuCategory {
+  id           String     @id @default(uuid())
+  name         String
+  displayOrder Int        @map("display_order")
+  menuItems    MenuItem[]
+
+  @@map("menu_categories")
+}
+
+model MenuItem {
+  id          String      @id @default(uuid())
+  categoryId  String      @map("category_id")
+  name        String
+  description String
+  basePrice   Decimal     @map("base_price") @db.Decimal(10, 2)
+  available   Boolean     @default(true)
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @updatedAt @map("updated_at")
+  category    MenuCategory @relation(fields: [categoryId], references: [id])
+  orderItems  OrderItem[]
+
+  @@map("menu_items")
+}
+
+enum BurgerOptionType {
+  PATTY_COUNT
+  CHEESE
+  TOPPING
+  CONDIMENT
+}
+
+model BurgerOption {
+  id            String              @id @default(uuid())
+  optionType    BurgerOptionType    @map("option_type")
+  name          String
+  priceModifier Decimal             @map("price_modifier") @db.Decimal(10, 2) @default(0.00)
+  available     Boolean             @default(true)
+  orderItemOptions OrderItemOption[]
+
+  @@map("burger_options")
+}
+
+enum OrderStatus {
+  PENDING
+  PREPARING
+  READY
+  COMPLETED
+  CANCELLED
+}
+
+model Order {
+  id          String      @id @default(uuid())
+  customerId  String      @map("customer_id")
+  orderNumber String      @unique @map("order_number")
+  status      OrderStatus @default(PENDING)
+  subtotal    Decimal     @db.Decimal(10, 2)
+  tax         Decimal     @db.Decimal(10, 2)
+  total       Decimal     @db.Decimal(10, 2)
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @updatedAt @map("updated_at")
+  customer    Customer    @relation(fields: [customerId], references: [id])
+  items       OrderItem[]
+
+  @@index([customerId])
+  @@index([orderNumber])
+  @@map("orders")
+}
+
+model OrderItem {
+  id                  String            @id @default(uuid())
+  orderId             String            @map("order_id")
+  menuItemId          String            @map("menu_item_id")
+  quantity            Int
+  unitPrice           Decimal           @map("unit_price") @db.Decimal(10, 2)
+  subtotal            Decimal           @db.Decimal(10, 2)
+  specialInstructions String?           @map("special_instructions")
+  order               Order             @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItem            MenuItem          @relation(fields: [menuItemId], references: [id])
+  options             OrderItemOption[]
+
+  @@map("order_items")
+}
+
+model OrderItemOption {
+  id             String       @id @default(uuid())
+  orderItemId    String       @map("order_item_id")
+  burgerOptionId String       @map("burger_option_id")
+  orderItem      OrderItem    @relation(fields: [orderItemId], references: [id], onDelete: Cascade)
+  burgerOption   BurgerOption @relation(fields: [burgerOptionId], references: [id])
+
+  @@map("order_item_options")
+}
