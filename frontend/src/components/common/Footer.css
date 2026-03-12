@@ -1,0 +1,19 @@
+.footer {
+  background-color: #f4f4f4;
+  padding: 2rem;
+  margin-top: auto;
+  border-top: 1px solid #e0e0e0;
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-content p {
+  margin: 0.5rem 0;
+  color: #525252;
+}
+
+/* Made with Bob */

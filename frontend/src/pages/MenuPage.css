@@ -1,0 +1,70 @@
+.menu-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.menu-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.menu-subtitle {
+  font-size: 1.125rem;
+  color: #525252;
+  margin-bottom: 2rem;
+}
+
+.menu-page-loading,
+.menu-page-error {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.menu-section {
+  margin-bottom: 3rem;
+}
+
+.menu-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #161616;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.menu-item-card {
+  padding: 1.5rem;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.menu-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #161616;
+}
+
+.menu-item-card p {
+  color: #525252;
+  margin-bottom: 0.5rem;
+}
+
+.menu-item-card .price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0f62fe;
+  margin-top: 1rem;
+}
+
+/* Made with Bob */
