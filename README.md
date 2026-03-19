@@ -240,7 +240,16 @@ npx prisma migrate dev --name your_migration_name
 
 # Apply migrations in production
 npm run db:migrate:deploy
+
+# Query database directly with Docker
+docker exec -it burger-palace-db psql -U burger_admin -d burger_palace
+
+# Example queries
+docker exec -it burger-palace-db psql -U burger_admin -d burger_palace -c "SELECT id, name, email FROM customers;"
+docker exec -it burger-palace-db psql -U burger_admin -d burger_palace -c "SELECT * FROM orders ORDER BY created_at DESC LIMIT 10;"
 ```
+
+**Note**: The PostgreSQL user is `burger_admin`, not `postgres`. Use this username when connecting to the database.
 
 ## 📦 Tech Stack
 
