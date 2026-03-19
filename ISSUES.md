@@ -149,11 +149,139 @@ router.get('/', getAllCustomers);
 
 ---
 
+## Issue #5: Feature - Customer Lookup by Email
+
+**Labels**: `enhancement`, `feature`, `backend`, `frontend`, `completed`
+
+### Description
+Added functionality to allow users to look up their customer information by email address, making it easier to access their account and order history without needing to remember their customer ID.
+
+### User Story
+As a customer, I want to search for my account using my email address so that I can easily access my customer information and order history without needing to remember my customer ID.
+
+### Implementation
+
+#### Backend Changes
+
+1. **Service Method** (`backend/src/services/customerService.ts`):
+```typescript
+async getCustomerByEmail(email: string): Promise<CustomerDto | null> {
+  const customer = await prisma.customer.findUnique({
+    where: { email },
+  });
+
+  if (!customer) {
+    throw new AppError('Customer not found with that email address', 404);
+  }
+
+  return customer as CustomerDto;
+}
+```
+
+2. **Controller Function** (`backend/src/controllers/customerController.ts`):
+```typescript
+export const getCustomerByEmail = asyncHandler(async (req: Request, res: Response) => {
+  const email = req.query.email as string;
+  
+  if (!email) {
+    return res.status(400).json({
+      status: 'error',
+      message: 'Email query parameter is required'
+    });
+  }
+
+  const customer = await customerService.getCustomerByEmail(email);
+  
+  res.json({
+    status: 'success',
+    data: customer,
+  });
+});
+```
+
+3. **API Route** (`backend/src/routes/customerRoutes.ts`):
+```typescript
+router.get('/search', getCustomerByEmail);
+```
+
+**API Endpoint**: `GET /api/customers/search?email={email}`
+
+#### Frontend Changes
+
+1. **Customer Lookup Page** (`frontend/src/pages/CustomerLookupPage.tsx`):
+   - Email search form with validation
+   - Real-time customer information display
+   - Customer details: ID, name, email, phone, member since date
+   - Direct navigation to order history
+   - Error handling for not found cases
+   - Help section for users
+
+2. **Styling** (`frontend/src/styles/CustomerLookupPage.css`):
+   - Clean, professional design
+   - Responsive layout for mobile and desktop
+   - Highlighted customer information cards
+   - Accessible form controls
+
+3. **Navigation Integration**:
+   - Added "My Account" link to header navigation
+   - Route configured at `/account`
+   - Accessible from any page in the application
+
+4. **Enhanced Order History Page** (`frontend/src/pages/OrderHistoryPage.tsx`):
+   - Auto-search functionality when `customerId` is provided in URL query params
+   - Seamless integration with customer lookup page
+   - "View Order History" button passes customer ID automatically
+
+### Features
+
+- **Email-based search**: Users can find their account using their email address
+- **Complete customer information display**: Shows all relevant customer details
+- **Quick access to order history**: One-click navigation to view all orders
+- **Error handling**: Clear error messages for invalid or not found emails
+- **Responsive design**: Works seamlessly on desktop and mobile devices
+- **Help section**: Provides guidance for users having trouble finding their account
+
+### API Response Format
+```json
+{
+  "status": "success",
+  "data": {
+    "id": "0cc956a9-f586-4e7a-907b-ae633bdadc5a",
+    "name": "Dave Wakeman",
+    "email": "dwakeman@us.ibm.com",
+    "phone": "515-988-8628",
+    "createdAt": "2026-03-19T21:07:24.026Z",
+    "updatedAt": "2026-03-19T21:07:24.026Z"
+  }
+}
+```
+
+### User Flow
+
+1. User clicks "My Account" in header navigation
+2. User enters their email address in the search form
+3. System searches for customer by email
+4. Customer information is displayed with details
+5. User can click "View Order History" to see all their orders
+6. Order history page automatically loads with customer's orders
+
+### Impact
+- **User Experience**: Significantly improved - no need to remember customer IDs
+- **Accessibility**: Makes the system more user-friendly
+- **Integration**: Seamlessly connects customer lookup with order history
+
+### Status
+✅ **Completed** in commit `cc8ccca`
+
+---
+
 ## Summary
 
-**Total Issues Fixed**: 3
-- **Critical**: 1 (Blank screen)
-- **Medium**: 1 (Order number undefined)
-- **Enhancement**: 1 (Missing API endpoint)
+**Total Issues/Features**: 4
+- **Critical Bug**: 1 (Blank screen) - Fixed
+- **Medium Bug**: 1 (Order number undefined) - Fixed
+- **Enhancement**: 2 (Missing API endpoint, Customer lookup by email) - Completed
 
-All issues have been resolved and included in the initial application release (commit `9cb7d0e`).
+All issues have been resolved and features implemented:
+- Initial release: commit `9cb7d0e`
+- Customer lookup feature: commit `cc8ccca`
