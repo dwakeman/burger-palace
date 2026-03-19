@@ -9,6 +9,7 @@ import BurgerBuilderPage from './pages/BurgerBuilderPage';
 import CheckoutPage from './pages/CheckoutPage';
 import OrderViewPage from './pages/OrderViewPage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
+import CustomerLookupPage from './pages/CustomerLookupPage';
 import './App.css';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/checkout" element={<CheckoutPage />} />
                 <Route path="/order/:orderNumber" element={<OrderViewPage />} />
                 <Route path="/orders" element={<OrderHistoryPage />} />
+                <Route path="/account" element={<CustomerLookupPage />} />
               </Routes>
             </main>
             <Footer />

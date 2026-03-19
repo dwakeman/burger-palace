@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   Button,
   TextInput,
@@ -14,38 +14,53 @@ import './OrderHistoryPage.css';
 
 const OrderHistoryPage = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [customerId, setCustomerId] = useState('');
   const [orders, setOrders] = useState<OrderSummaryDto[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [searched, setSearched] = useState(false);
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // Auto-search if customerId is provided in URL
+  useEffect(() => {
+    const customerIdFromUrl = searchParams.get('customerId');
+    if (customerIdFromUrl) {
+      setCustomerId(customerIdFromUrl);
+      // Trigger search automatically
+      fetchOrders(customerIdFromUrl);
+    }
+  }, [searchParams]);
+
+  const fetchOrders = async (id: string) => {
     setError(null);
     setSearched(false);
-
-    if (!customerId.trim()) {
-      setError('Please enter a customer ID');
-      return;
-    }
-
     setLoading(true);
 
     try {
-      const response = await api.get(`/orders/customer/${customerId.trim()}`);
+      const response = await api.get(`/orders/customer/${id.trim()}`);
       setOrders(response.data.data);
       setSearched(true);
     } catch (err: any) {
       console.error('Failed to fetch orders:', err);
       setError(
-        err.response?.data?.message || 
+        err.response?.data?.message ||
         'Failed to load order history. Please check your customer ID.'
       );
       setOrders([]);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!customerId.trim()) {
+      setError('Please enter a customer ID');
+      return;
+    }
+
+    fetchOrders(customerId);
   };
 
   const getStatusColor = (status: OrderStatus) => {

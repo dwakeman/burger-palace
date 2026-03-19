@@ -30,6 +30,9 @@ const Header = () => {
         <HeaderMenuItem element={Link} to="/orders">
           Track Order
         </HeaderMenuItem>
+        <HeaderMenuItem element={Link} to="/account">
+          My Account
+        </HeaderMenuItem>
       </HeaderNavigation>
       <HeaderGlobalBar>
         <HeaderGlobalAction

@@ -40,6 +40,18 @@ export class CustomerService {
     return customers as CustomerDto[];
   }
 
+  async getCustomerByEmail(email: string): Promise<CustomerDto | null> {
+    const customer = await prisma.customer.findUnique({
+      where: { email },
+    });
+
+    if (!customer) {
+      throw new AppError('Customer not found with that email address', 404);
+    }
+
+    return customer as CustomerDto;
+  }
+
   async findOrCreateCustomer(data: CreateCustomerDto): Promise<CustomerDto> {
     const existingCustomer = await prisma.customer.findUnique({
       where: { email: data.email },

@@ -1,0 +1,175 @@
+.customer-lookup-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.customer-lookup-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.customer-lookup-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #161616;
+}
+
+.customer-lookup-header p {
+  font-size: 1.125rem;
+  color: #525252;
+}
+
+.customer-lookup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.lookup-form-tile {
+  padding: 2rem;
+}
+
+.lookup-form-tile h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #161616;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.lookup-notification {
+  margin: 1rem 0;
+}
+
+.search-button {
+  width: 100%;
+  max-width: 200px;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.customer-info-tile {
+  padding: 2rem;
+  background-color: #f4f4f4;
+  border-left: 4px solid #0f62fe;
+}
+
+.customer-info-tile h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #161616;
+}
+
+.customer-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #525252;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-value {
+  font-size: 1rem;
+  color: #161616;
+  text-align: right;
+  word-break: break-word;
+  max-width: 60%;
+}
+
+.customer-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.customer-actions button {
+  flex: 1;
+  min-width: 200px;
+}
+
+.lookup-help {
+  margin-top: 2rem;
+}
+
+.help-tile {
+  padding: 1.5rem;
+  background-color: #e8f4ff;
+  border-left: 4px solid #0f62fe;
+}
+
+.help-tile h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: #161616;
+}
+
+.help-tile p {
+  font-size: 0.875rem;
+  color: #525252;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .customer-lookup-page {
+    padding: 1rem;
+  }
+
+  .customer-lookup-header h1 {
+    font-size: 2rem;
+  }
+
+  .lookup-form-tile,
+  .customer-info-tile,
+  .help-tile {
+    padding: 1.5rem;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .detail-value {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .customer-actions {
+    flex-direction: column;
+  }
+
+  .customer-actions button {
+    width: 100%;
+  }
+
+  .search-button {
+    max-width: 100%;
+  }
+}
+
+/* Made with Bob */
