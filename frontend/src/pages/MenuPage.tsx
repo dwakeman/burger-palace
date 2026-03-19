@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Loading } from '@carbon/react';
+import { Loading, Button, InlineNotification } from '@carbon/react';
+import { ShoppingCart } from '@carbon/icons-react';
 import { menuService } from '../services/menuService';
-import { MenuDto } from '@burger-palace/shared';
+import { MenuDto, MenuItemDto } from '@burger-palace/shared';
+import { useCart } from '../context/CartContext';
 import './MenuPage.css';
 
 const MenuPage = () => {
   const [menu, setMenu] = useState<MenuDto | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [addedItemId, setAddedItemId] = useState<string | null>(null);
+  const { addItem } = useCart();
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -24,6 +28,24 @@ const MenuPage = () => {
 
     fetchMenu();
   }, []);
+
+  const handleAddToCart = (item: MenuItemDto) => {
+    const cartItem = {
+      id: `${item.id}-${Date.now()}`, // Unique ID for cart item
+      menuItem: item,
+      quantity: 1,
+      selectedOptions: [], // No options selected for simple add
+      specialInstructions: undefined,
+    };
+    
+    addItem(cartItem);
+    setAddedItemId(item.id);
+    
+    // Clear notification after 2 seconds
+    setTimeout(() => {
+      setAddedItemId(null);
+    }, 2000);
+  };
 
   if (loading) {
     return (
@@ -47,18 +69,38 @@ const MenuPage = () => {
       <h1>Our Menu</h1>
       <p className="menu-subtitle">Build your perfect burger and choose your sides</p>
       
+      {addedItemId && (
+        <InlineNotification
+          kind="success"
+          title="Added to cart!"
+          subtitle="Item has been added to your cart"
+          lowContrast
+          hideCloseButton
+          style={{ marginBottom: '1rem' }}
+        />
+      )}
+      
       {menu && (
         <div className="menu-content">
           <section className="menu-section">
             <h2>🍔 Burgers</h2>
             <div className="menu-grid">
               {menu.items
-                .filter(item => item.categoryId === menu.categories.find(c => c.name === 'Burgers')?.id)
-                .map(item => (
+                .filter((item: MenuItemDto) => item.categoryId === menu.categories.find((c: any) => c.name === 'Burgers')?.id)
+                .map((item: MenuItemDto) => (
                   <div key={item.id} className="menu-item-card">
                     <h3>{item.name}</h3>
                     <p>{item.description}</p>
-                    <p className="price">${Number(item.basePrice).toFixed(2)}</p>
+                    <div className="card-footer">
+                      <p className="price">${Number(item.basePrice).toFixed(2)}</p>
+                      <Button
+                        size="sm"
+                        renderIcon={ShoppingCart}
+                        onClick={() => handleAddToCart(item)}
+                      >
+                        Add to Cart
+                      </Button>
+                    </div>
                   </div>
                 ))}
             </div>
@@ -68,12 +110,21 @@ const MenuPage = () => {
             <h2>🍟 Sides</h2>
             <div className="menu-grid">
               {menu.items
-                .filter(item => item.categoryId === menu.categories.find(c => c.name === 'Sides')?.id)
-                .map(item => (
+                .filter((item: MenuItemDto) => item.categoryId === menu.categories.find((c: any) => c.name === 'Sides')?.id)
+                .map((item: MenuItemDto) => (
                   <div key={item.id} className="menu-item-card">
                     <h3>{item.name}</h3>
                     <p>{item.description}</p>
-                    <p className="price">${Number(item.basePrice).toFixed(2)}</p>
+                    <div className="card-footer">
+                      <p className="price">${Number(item.basePrice).toFixed(2)}</p>
+                      <Button
+                        size="sm"
+                        renderIcon={ShoppingCart}
+                        onClick={() => handleAddToCart(item)}
+                      >
+                        Add to Cart
+                      </Button>
+                    </div>
                   </div>
                 ))}
             </div>
@@ -83,12 +134,21 @@ const MenuPage = () => {
             <h2>🥤 Drinks</h2>
             <div className="menu-grid">
               {menu.items
-                .filter(item => item.categoryId === menu.categories.find(c => c.name === 'Drinks')?.id)
-                .map(item => (
+                .filter((item: MenuItemDto) => item.categoryId === menu.categories.find((c: any) => c.name === 'Drinks')?.id)
+                .map((item: MenuItemDto) => (
                   <div key={item.id} className="menu-item-card">
                     <h3>{item.name}</h3>
                     <p>{item.description}</p>
-                    <p className="price">${Number(item.basePrice).toFixed(2)}</p>
+                    <div className="card-footer">
+                      <p className="price">${Number(item.basePrice).toFixed(2)}</p>
+                      <Button
+                        size="sm"
+                        renderIcon={ShoppingCart}
+                        onClick={() => handleAddToCart(item)}
+                      >
+                        Add to Cart
+                      </Button>
+                    </div>
                   </div>
                 ))}
             </div>

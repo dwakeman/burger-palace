@@ -5,6 +5,7 @@ import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import HomePage from './pages/HomePage';
 import MenuPage from './pages/MenuPage';
+import BurgerBuilderPage from './pages/BurgerBuilderPage';
 import CheckoutPage from './pages/CheckoutPage';
 import OrderViewPage from './pages/OrderViewPage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
@@ -21,6 +22,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/menu" element={<MenuPage />} />
+                <Route path="/build" element={<BurgerBuilderPage />} />
                 <Route path="/checkout" element={<CheckoutPage />} />
                 <Route path="/order/:orderNumber" element={<OrderViewPage />} />
                 <Route path="/orders" element={<OrderHistoryPage />} />

@@ -32,6 +32,14 @@ export class CustomerService {
     return customer as CustomerDto;
   }
 
+  async getAllCustomers(): Promise<CustomerDto[]> {
+    const customers = await prisma.customer.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+
+    return customers as CustomerDto[];
+  }
+
   async findOrCreateCustomer(data: CreateCustomerDto): Promise<CustomerDto> {
     const existingCustomer = await prisma.customer.findUnique({
       where: { email: data.email },

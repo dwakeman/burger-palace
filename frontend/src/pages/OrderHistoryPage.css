@@ -1,0 +1,206 @@
+.order-history-page {
+  min-height: calc(100vh - 3rem);
+  background-color: #f4f4f4;
+  padding: 2rem 0;
+}
+
+.order-history-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.order-history-container h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #161616;
+}
+
+.page-subtitle {
+  font-size: 1.125rem;
+  color: #525252;
+  margin-bottom: 2rem;
+}
+
+/* Search Section */
+.search-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.search-form {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+}
+
+.search-form > div {
+  flex: 1;
+}
+
+.search-form button {
+  flex-shrink: 0;
+}
+
+.help-text {
+  padding: 1rem;
+  background: #f4f4f4;
+  border-radius: 4px;
+  border-left: 3px solid #0f62fe;
+}
+
+.help-text p {
+  margin: 0;
+  color: #525252;
+  font-size: 0.875rem;
+}
+
+.help-text strong {
+  color: #161616;
+}
+
+/* Loading */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0;
+}
+
+/* No Orders */
+.no-orders {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.no-orders h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #161616;
+}
+
+.no-orders p {
+  color: #525252;
+  margin-bottom: 2rem;
+}
+
+/* Orders Section */
+.orders-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.orders-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #161616;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Order Card */
+.order-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  background: #f4f4f4;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.order-info h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #161616;
+}
+
+.order-date {
+  font-size: 0.875rem;
+  color: #525252;
+}
+
+.order-card-body {
+  margin-bottom: 1rem;
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-label {
+  font-size: 1rem;
+  color: #525252;
+}
+
+.total-amount {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #0f62fe;
+}
+
+.order-card-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-form button {
+    width: 100%;
+  }
+
+  .order-card-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .order-total {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .order-card-footer {
+    justify-content: stretch;
+  }
+
+  .order-card-footer button {
+    width: 100%;
+  }
+}
+
+/* Made with Bob */

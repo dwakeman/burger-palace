@@ -1,0 +1,228 @@
+.burger-builder-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.burger-builder-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.burger-builder-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #161616;
+}
+
+.burger-builder-header p {
+  font-size: 1.125rem;
+  color: #525252;
+}
+
+.burger-builder-loading,
+.burger-builder-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  padding: 2rem;
+}
+
+.burger-builder-notification {
+  margin-bottom: 1rem;
+}
+
+.burger-builder-content {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .burger-builder-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .burger-builder-summary {
+    order: -1;
+  }
+}
+
+.burger-builder-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.builder-section {
+  padding: 1.5rem;
+}
+
+.builder-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #161616;
+}
+
+.section-note {
+  font-size: 0.875rem;
+  color: #525252;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.item-description {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background-color: #f4f4f4;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: #525252;
+}
+
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.burger-builder-summary {
+  position: sticky;
+  top: 2rem;
+}
+
+.summary-tile {
+  padding: 1.5rem;
+}
+
+.summary-tile h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #161616;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.75rem;
+}
+
+.summary-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.summary-item:last-of-type {
+  border-bottom: none;
+}
+
+.summary-label {
+  font-weight: 600;
+  color: #161616;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.summary-value {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  color: #393939;
+}
+
+.summary-price {
+  font-weight: 600;
+  color: #0f62fe;
+}
+
+.summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.summary-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1rem;
+  font-size: 0.875rem;
+  color: #525252;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  margin-top: 1rem;
+  border-top: 2px solid #161616;
+}
+
+.total-label {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #161616;
+}
+
+.total-price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f62fe;
+}
+
+.summary-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.add-to-cart-btn {
+  width: 100%;
+}
+
+/* Radio button and checkbox styling adjustments */
+.builder-section .cds--radio-button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.builder-section .cds--radio-button-wrapper {
+  margin-bottom: 0.5rem;
+}
+
+.builder-section .cds--checkbox-wrapper {
+  margin-bottom: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .burger-builder-page {
+    padding: 1rem;
+  }
+
+  .burger-builder-header h1 {
+    font-size: 2rem;
+  }
+
+  .checkbox-group {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-tile {
+    padding: 1rem;
+  }
+}
+
+/* Made with Bob */

@@ -12,6 +12,15 @@ export const getCustomerById = asyncHandler(async (req: Request, res: Response) 
   });
 });
 
+export const getAllCustomers = asyncHandler(async (req: Request, res: Response) => {
+  const customers = await customerService.getAllCustomers();
+  
+  res.json({
+    status: 'success',
+    data: customers,
+  });
+});
+
 export const createCustomer = asyncHandler(async (req: Request, res: Response) => {
   const customer = await customerService.createCustomer(req.body);
   

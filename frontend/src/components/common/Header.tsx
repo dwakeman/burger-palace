@@ -24,6 +24,9 @@ const Header = () => {
         <HeaderMenuItem element={Link} to="/menu">
           Menu
         </HeaderMenuItem>
+        <HeaderMenuItem element={Link} to="/build">
+          Build a Burger
+        </HeaderMenuItem>
         <HeaderMenuItem element={Link} to="/orders">
           Track Order
         </HeaderMenuItem>
